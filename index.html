@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Companion</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= LOGIN / SIGN UP ================= -->
+<section id="authView" class="auth-view" hidden>
+  <div class="auth-cover">
+
+    <div class="auth-top">
+      <select id="authLang" aria-label="Language"></select>
+    </div>
+
+    <div class="auth-cross">&#10013;</div>
+    <h1>Bible Companion</h1>
+    <p id="authSubtitle" class="auth-sub"></p>
+
+    <div class="auth-tabs">
+      <button type="button" id="tabLogin" class="tab active"></button>
+      <button type="button" id="tabSignup" class="tab"></button>
+    </div>
+
+    <form id="authForm" novalidate>
+      <label for="authUser" id="lblUser"></label>
+      <input id="authUser" type="text" autocomplete="username" maxlength="24">
+
+      <label for="authPass" id="lblPass"></label>
+      <input id="authPass" type="password" autocomplete="current-password">
+
+      <div id="confirmWrap" hidden>
+        <label for="authPass2" id="lblPass2"></label>
+        <input id="authPass2" type="password" autocomplete="new-password">
+      </div>
+
+      <p id="authMsg" class="auth-msg" role="alert"></p>
+      <button type="submit" id="authSubmit" class="primary"></button>
+    </form>
+
+    <p id="authNote" class="auth-note"></p>
+  </div>
+</section>
+
+
+<!-- ================= APP ================= -->
+<div id="appView" hidden>
+
+  <nav class="topbar">
+    <div class="logo">&#128214; Bible Companion</div>
+
+    <div class="top-right">
+      <select id="langSelect" aria-label="Language"></select>
+      <select id="versionSelect" aria-label="Bible version"></select>
+      <span id="userName" class="user-name"></span>
+      <button type="button" id="logoutBtn" class="ghost"></button>
+    </div>
+  </nav>
+
+  <main>
+
+    <form id="searchForm" class="search-bar">
+      <h2 id="searchTitle"></h2>
+      <div class="search-row">
+        <input id="searchInput" type="text" autocomplete="off">
+        <button type="submit" id="searchBtn" class="primary"></button>
+      </div>
+    </form>
+
+    <section class="book">
+      <div class="book-spread">
+
+        <!-- LEFT PAGE: verses -->
+        <div class="page page-verses" id="versesPage">
+          <div id="passageHead" class="passage-head"></div>
+          <div id="verses" class="verses"></div>
+          <p id="notice" class="notice"></p>
+          <div id="pager" class="pager"></div>
+        </div>
+
+        <!-- RIGHT PAGE: books and chapters -->
+        <aside class="page page-toc" id="tocPage"></aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Bible Companion<br>
+    Powered by <a href="https://bible-api.com/" target="_blank" rel="noopener">bible-api.com</a>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

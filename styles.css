@@ -1,0 +1,519 @@
+/* ==================================================
+   BIBLE COMPANION - open-book theme
+================================================== */
+
+:root {
+    --desk-1:    #2a1f19;
+    --desk-2:    #17110d;
+    --cover:     #6b3a22;
+    --cover-dk:  #4a2615;
+    --gold:      #d3b06a;
+    --gold-dk:   #a8844f;
+    --paper:     #fbf6ea;
+    --paper-dk:  #efe4cb;
+    --ink:       #2e2318;
+    --ink-soft:  #86705a;
+    --accent:    #9b2d30;
+    --line:      #dccfae;
+    --font:      "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+    background:
+        radial-gradient(ellipse at 50% -10%, rgba(255, 214, 140, 0.16), transparent 55%),
+        linear-gradient(180deg, var(--desk-1) 0%, var(--desk-2) 100%);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: rgba(211, 176, 106, 0.45); }
+
+/* ---------- shared form bits ---------- */
+
+input, select, button { font-family: var(--font); font-size: 1rem; }
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    background: #fffdf6;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--cover);
+    box-shadow: 0 0 0 3px rgba(168, 132, 79, 0.28);
+}
+
+button { cursor: pointer; }
+
+.primary {
+    padding: 10px 22px;
+    color: var(--gold);
+    background: linear-gradient(180deg, #7c4527 0%, var(--cover-dk) 100%);
+    border: 1px solid var(--gold-dk);
+    border-radius: 10px;
+    letter-spacing: 0.4px;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+.primary:hover {
+    background: linear-gradient(180deg, #8f512e 0%, var(--cover) 100%);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ==================================================
+   LOGIN / SIGN UP
+================================================== */
+
+.auth-view {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+}
+
+.auth-cover {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px 34px 30px;
+    text-align: center;
+    color: #e8d9b8;
+    background:
+        radial-gradient(circle at 80% 10%, rgba(255, 220, 150, 0.14), transparent 50%),
+        linear-gradient(135deg, #6f3b21 0%, var(--cover-dk) 100%);
+    border-radius: 14px;
+    box-shadow:
+        inset 0 0 0 7px var(--cover-dk),
+        inset 0 0 0 9px var(--gold-dk),
+        inset 0 0 50px rgba(0, 0, 0, 0.5),
+        0 30px 60px rgba(0, 0, 0, 0.6);
+}
+
+.auth-top { text-align: right; margin-bottom: 4px; }
+
+.auth-top select,
+.top-right select {
+    width: auto;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    color: var(--gold);
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(211, 176, 106, 0.45);
+    border-radius: 999px;
+}
+
+.auth-top option,
+.top-right option { background: #fffaf0; color: var(--ink); }
+
+.auth-cross {
+    font-size: 2.2rem;
+    color: var(--gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.auth-cover h1 {
+    margin: 2px 0 4px;
+    font-size: 2rem;
+    font-weight: normal;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.auth-sub { margin: 0 0 18px; font-style: italic; color: #cdbd9c; }
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 14px;
+    border: 1px solid rgba(211, 176, 106, 0.4);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.tab {
+    flex: 1;
+    padding: 9px 10px;
+    color: #cdbd9c;
+    background: transparent;
+    border: none;
+}
+
+.tab.active { background: var(--gold); color: var(--cover-dk); font-weight: bold; }
+
+#authForm { text-align: left; }
+
+#authForm label {
+    display: block;
+    margin: 12px 0 5px;
+    font-size: 0.85rem;
+    color: #cdbd9c;
+}
+
+.auth-msg {
+    min-height: 1.3em;
+    margin: 10px 0 6px;
+    font-size: 0.9rem;
+    color: #ffb4a8;
+}
+
+#authSubmit { width: 100%; padding: 12px; margin-top: 4px; }
+
+.auth-note { margin: 14px 0 0; font-size: 0.8rem; color: #b5a47f; }
+
+
+/* ==================================================
+   TOP BAR
+================================================== */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 28px;
+    background: rgba(23, 17, 13, 0.88);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(211, 176, 106, 0.28);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+
+.logo { font-size: 1.2rem; letter-spacing: 0.5px; color: var(--gold); }
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #cdbd9c;
+    font-size: 0.92rem;
+}
+
+.user-name { color: var(--gold); }
+
+.ghost {
+    padding: 6px 16px;
+    font-size: 0.88rem;
+    color: var(--gold);
+    background: transparent;
+    border: 1px solid rgba(211, 176, 106, 0.45);
+    border-radius: 999px;
+    transition: all 0.2s;
+}
+
+.ghost:hover { background: var(--gold); color: var(--cover-dk); }
+
+
+/* ==================================================
+   LAYOUT + SEARCH
+================================================== */
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 22px 20px 30px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 18px;
+    margin-bottom: 22px;
+    background: rgba(251, 246, 234, 0.96);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+.search-bar h2 {
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--cover);
+    white-space: nowrap;
+}
+
+.search-row { flex: 1; display: flex; gap: 10px; }
+
+
+/* ==================================================
+   THE OPEN BOOK
+================================================== */
+
+.book {
+    position: relative;
+    background: var(--paper);
+    border: 11px solid var(--cover);
+    border-radius: 10px 10px 14px 14px;
+    box-shadow:
+        inset 0 0 0 1px var(--gold-dk),
+        0 0 0 2px var(--cover-dk),
+        0 5px 0 -1px #f4ebd2,
+        0 7px 0 -2px #cdbd96,
+        0 10px 0 -3px #f4ebd2,
+        0 12px 0 -4px #cdbd96,
+        0 36px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ribbon bookmark */
+.book::before {
+    content: "";
+    position: absolute;
+    top: -11px;
+    right: 120px;
+    width: 26px;
+    height: 100px;
+    background: linear-gradient(90deg, #7a1523 0%, #b02f40 50%, #7a1523 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%);
+    z-index: 5;
+}
+
+.book-spread {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    height: min(80vh, 780px);
+    min-height: 520px;
+}
+
+/* the crease in the middle */
+.book-spread::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg,
+        rgba(60, 35, 10, 0.12), rgba(60, 35, 10, 0.40) 50%, rgba(60, 35, 10, 0.12));
+    pointer-events: none;
+    z-index: 4;
+}
+
+.page {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c9b88f transparent;
+    background: radial-gradient(ellipse at 50% 40%, #fffaf0 0%, var(--paper) 62%, var(--paper-dk) 100%);
+}
+
+.page::-webkit-scrollbar { width: 8px; }
+.page::-webkit-scrollbar-thumb { background: #c9b88f; border-radius: 8px; }
+
+.page-verses {
+    padding: 34px 48px 30px 44px;
+    box-shadow: inset -42px 0 42px -34px rgba(80, 50, 15, 0.38);
+}
+
+.page-toc {
+    position: relative;
+    padding: 26px 30px 26px 50px;
+    box-shadow: inset 42px 0 42px -34px rgba(80, 50, 15, 0.38);
+}
+
+
+/* ---------- left page: heading + verses ---------- */
+
+.passage-head { text-align: center; padding-bottom: 12px; margin-bottom: 8px; }
+
+.passage-head::after {
+    content: "\2766";
+    display: block;
+    margin-top: 8px;
+    font-size: 1.4rem;
+    color: var(--gold-dk);
+}
+
+.cross { font-size: 1.5rem; color: var(--accent); }
+
+.passage-head h2 {
+    margin: 0;
+    font-size: 2.1rem;
+    letter-spacing: 1px;
+    color: var(--cover-dk);
+}
+
+.version-name { margin: 4px 0 10px; font-style: italic; color: var(--ink-soft); }
+
+.lang-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gold-dk);
+    border: 1px solid var(--gold-dk);
+    border-radius: 999px;
+}
+
+.verses { text-align: justify; line-height: 1.95; font-size: 1.14rem; }
+
+.vnum {
+    margin: 0 4px 0 3px;
+    font-size: 0.68em;
+    font-weight: bold;
+    line-height: 0;
+    color: var(--accent);
+}
+
+.vtext { transition: opacity 0.25s; }
+.vtext.pending { opacity: 0.45; }
+.vtext.untranslated { opacity: 0.8; font-style: italic; }
+
+.status { text-align: center; color: var(--ink-soft); font-style: italic; padding: 30px 0; }
+
+.notice { margin: 14px 0 0; text-align: center; font-size: 0.9rem; font-style: italic; color: var(--ink-soft); }
+.notice:empty { display: none; }
+
+.pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px dotted #b79e6b;
+}
+
+.pager:empty { display: none; }
+
+.pager-btn {
+    padding: 8px 18px;
+    font-style: italic;
+    color: var(--cover);
+    background: transparent;
+    border: 1px solid var(--gold-dk);
+    border-radius: 999px;
+    transition: all 0.2s;
+}
+
+.pager-btn:hover { background: var(--cover); border-color: var(--cover); color: var(--gold); }
+
+
+/* ---------- right page: books + chapters ---------- */
+
+.toc-heading {
+    margin: 22px 0 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--gold-dk);
+    font-size: 0.9rem;
+    font-variant: small-caps;
+    letter-spacing: 2px;
+    text-align: center;
+    color: var(--accent);
+}
+
+.toc-heading:first-child { margin-top: 0; }
+
+.toc-book { border-bottom: 1px dotted var(--line); }
+
+.toc-book summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 8px;
+    font-weight: 600;
+    color: var(--cover-dk);
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.toc-book summary::-webkit-details-marker { display: none; }
+
+.toc-book summary::before {
+    content: "\25B8";
+    display: inline-block;
+    width: 18px;
+    color: var(--gold-dk);
+}
+
+.toc-book[open] > summary::before { content: "\25BE"; }
+.toc-book summary:hover { background: rgba(168, 132, 79, 0.16); }
+.toc-book[open] > summary { background: rgba(168, 132, 79, 0.14); color: var(--accent); }
+
+.chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    gap: 6px;
+    padding: 10px 4px 14px;
+}
+
+.chapter-num {
+    padding: 6px 0;
+    font-size: 0.88rem;
+    color: var(--cover);
+    background: #fffdf6;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: all 0.15s;
+}
+
+.chapter-num:hover { background: var(--gold); border-color: var(--gold-dk); color: var(--cover-dk); }
+.chapter-num.active { background: var(--cover); border-color: var(--cover); color: var(--gold); font-weight: bold; }
+
+
+/* ---------- footer ---------- */
+
+footer {
+    padding: 10px 20px 38px;
+    text-align: center;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #a99a7c;
+}
+
+footer a { color: var(--gold); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 800px) {
+
+    .topbar { flex-wrap: wrap; padding: 10px 14px; }
+    .top-right { flex-wrap: wrap; justify-content: flex-end; }
+    .user-name { display: none; }
+
+    main { padding: 14px 12px 24px; }
+
+    .search-bar { flex-direction: column; align-items: stretch; gap: 8px; }
+
+    .book-spread { grid-template-columns: 1fr; height: auto; min-height: 0; }
+    .book-spread::after { display: none; }
+
+    .page { overflow: visible; }
+
+    .page-verses { padding: 24px 18px; box-shadow: none; }
+
+    .page-toc {
+        max-height: 340px;
+        overflow-y: auto;
+        padding: 18px;
+        box-shadow: inset 0 22px 22px -18px rgba(80, 50, 15, 0.35);
+        border-top: 1px solid rgba(90, 58, 20, 0.3);
+    }
+
+    .book::before { right: 30px; height: 70px; width: 20px; }
+
+    .passage-head h2 { font-size: 1.7rem; }
+    .verses { font-size: 1.08rem; text-align: left; }
+}
